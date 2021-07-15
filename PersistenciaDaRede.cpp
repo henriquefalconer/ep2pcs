@@ -38,7 +38,7 @@ void PersistenciaDaRede::salvar(RedeSocial* r) {
     output << pessoas->size() << endl;
 
     for (auto pnv : *pessoas)
-        output << pnv->getId() << " " << pnv->getNome() << " ";
+        output << pnv->getId() << " " << pnv->getNome() << " " << endl;
 
     output << pessoasVerificadas->size() << endl;
 
