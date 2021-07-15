@@ -1,5 +1,6 @@
 #include "PersistenciaDaRede.h"
 #include <fstream>
+#include "trycatch.h"
 
 #include "Pagina.h"
 #include "PessoaVerificada.h"
@@ -98,11 +99,7 @@ RedeSocial* PersistenciaDaRede::carregar() {
         if (!input) break;
         auto p = r->getPerfil(id);
         auto c = r->getPerfil(idContato);
-        try {
-            p->adicionar(c);
-        } catch (...) {
-            // Fazer nada
-        }
+        tryCatch([=]() { p->adicionar(c); });
     }
 
     if (!input.eof()) throw new logic_error("Erro de leitura");

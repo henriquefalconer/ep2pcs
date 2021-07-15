@@ -1,4 +1,5 @@
 #include "iofuncs.h"
+#include "trycatch.h"
 #include <functional>
 
 #include "Pagina.h"
@@ -160,11 +161,10 @@ FuncaoDeRede opcoesLogadas(Perfil* perfil) {
 
         auto adicionarContato = [&, perfil](Perfil* novoContato) {
             return [=, &foiPossivelAdicionar](RedeSocial* redeSocial) {
-                try {
-                    perfil->adicionar(novoContato);
-                } catch (...) {
-                    foiPossivelAdicionar = false;
-                }
+                tryCatch(
+                    [=]() { perfil->adicionar(novoContato); },
+                    [&]() { foiPossivelAdicionar = false; }
+                );
             };
         };
 
