@@ -161,7 +161,7 @@ FuncaoDeRede opcoesLogadas(Perfil* perfil) {
         bool foiPossivelAdicionar = true;
 
         auto adicionarContato = [&, perfil](Perfil* novoContato) {
-            return [=, &foiPossivelAdicionar](RedeSocial* redeSocial) {
+            return [&, perfil, novoContato](RedeSocial* redeSocial) {
                 tryCatch(
                     [=]() { perfil->adicionar(novoContato); },
                     [&]() { foiPossivelAdicionar = false; }
