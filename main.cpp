@@ -10,8 +10,8 @@
 #include "PersistenciaDaRede.h"
 #include "Story.h"
 
-using FuncaoDeRede = function<void (RedeSocial*)>;
-using CriadorDeFuncaoDeRede = function<FuncaoDeRede (Perfil*)>;
+using FuncaoDeRede = function<void(RedeSocial*)>;
+using CriadorDeFuncaoDeRede = function<FuncaoDeRede(Perfil*)>;
 
 int encontrarIndice(int numero, int* numberos, int quantidade) {
     for (int i = 0; i < quantidade; i++)
@@ -74,9 +74,8 @@ void criarOpcoesUsuario(
 ) {
     int i = 0;
     for (auto perfil : *redeSocial->getPerfis()) {
-        opcoesUsuario[i] =
-            perfil->getNome() +
-            (dynamic_cast<PessoaVerificada*>(perfil) ? " (Verificada)" : "");
+        opcoesUsuario[i] = perfil->getNome() 
+            + (dynamic_cast<PessoaVerificada*>(perfil) ? " (Verificada)" : "");
 
         funcoes[i] = criarFuncao(perfil);
         idsUsuarios[i] = perfil->getId();
@@ -138,8 +137,10 @@ FuncaoDeRede opcoesLogadas(Perfil* perfil) {
         string texto = input("Texto: ", '\n');
 
         perfil->adicionar(
-            ehStory ? new Story(texto, data, dataDeFim, perfil)
-                    : new Postagem(texto, data, perfil));
+            ehStory 
+                ? new Story(texto, data, dataDeFim, perfil)
+                : new Postagem(texto, data, perfil)
+        );
     };
 
     auto verPostagens = [perfil](RedeSocial* redeSocial) {
@@ -185,8 +186,7 @@ FuncaoDeRede opcoesLogadas(Perfil* perfil) {
                 printinl(" - ", pessoaVerificada->getEmail());
 
             else if (auto pagina = dynamic_cast<Pagina*>(perfil))
-                printinl(
-                    "\nProprietario ", pagina->getProprietario()->getNome());
+                printinl("\nProprietario ", pagina->getProprietario()->getNome());
 
             print("\nContatos: ", perfil->getContatos()->size(), "\n---");
 
@@ -203,13 +203,15 @@ FuncaoDeRede opcoesLogadas(Perfil* perfil) {
                 listaDeAdicionarContato 
             };
 
-            repetir = imprimirOpcoes(redeSocial,
-                "Escolha uma opcao:",
-                "",
-                4,
-                opcoes,
-                funcoes,
-                true);
+            repetir = imprimirOpcoes(
+                redeSocial, 
+                "Escolha uma opcao:", 
+                "", 
+                4, 
+                opcoes, 
+                funcoes, 
+                true
+            );
         } while (repetir);
     };
 }
@@ -228,14 +230,7 @@ void interfaceGrafica(RedeSocial* redeSocial) {
 
     FuncaoDeRede funcoes[] = { cadastroPessoa, cadastroPagina, logar };
 
-    while (imprimirOpcoes(redeSocial,
-        "Escolha uma opcao",
-        "",
-        4,
-        opcoes,
-        funcoes,
-        true)
-    ) {}
+    while (imprimirOpcoes(redeSocial, "Escolha uma opcao", "", 4, opcoes, funcoes, true)) {}
 }
 
 int main() {
