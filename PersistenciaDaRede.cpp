@@ -55,6 +55,10 @@ void PersistenciaDaRede::salvar(RedeSocial* r) {
     for (auto perfil : *r->getPerfis())
         for (auto contato : *perfil->getContatos())
             output << perfil->getId() << " " << contato->getId() << endl;
+
+    delete pessoasVerificadas;
+    delete pessoas;
+    delete paginas;
 }
 
 RedeSocial* PersistenciaDaRede::carregar() {
