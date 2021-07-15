@@ -26,11 +26,11 @@ void PersistenciaDaRede::salvar(RedeSocial* r) {
         if (auto pv = dynamic_cast<PessoaVerificada*>(p))
             pessoasVerificadas->push_back(pv);
 
-        else if (auto pnv = dynamic_cast<Pessoa*>(p))
-            pessoas->push_back(pnv);
-
         else if (auto pg = dynamic_cast<Pagina*>(p))
             paginas->push_back(pg);
+
+        else if (auto pnv = dynamic_cast<Pessoa*>(p))
+            pessoas->push_back(pnv);
     }
 
     output << Perfil::getUltimoId() << endl;

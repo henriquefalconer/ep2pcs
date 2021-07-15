@@ -53,11 +53,11 @@ void RedeSocial::imprimirEstatisticas() {
         if (dynamic_cast<PessoaVerificada*>(perfil))
             quantidadePessoasVerificadas++;
 
-        else if (dynamic_cast<Pessoa*>(perfil))
-            quantidadePessoasNaoVerificadas++;
-
         else if (dynamic_cast<Pagina*>(perfil))
             quantidadePaginas++;
+
+        else if (dynamic_cast<Pessoa*>(perfil))
+            quantidadePessoasNaoVerificadas++;
 
         else
             quantidadePerfis++;
