@@ -13,9 +13,10 @@
 using FuncaoDeRede = function<void(RedeSocial*)>;
 using CriadorDeFuncaoDeRede = function<FuncaoDeRede(Perfil*)>;
 
-int encontrarIndice(int numero, int* numberos, int quantidade) {
+template<typename T>
+int encontrarIndice(T item, T* lista, int quantidade) {
     for (int i = 0; i < quantidade; i++)
-        if (numberos[i] == numero) return i;
+        if (lista[i] == item) return i;
     return -1;
 }
 
